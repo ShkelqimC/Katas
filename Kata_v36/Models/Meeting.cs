@@ -27,7 +27,6 @@ namespace Scheduler.Models
         {
             bool endIsBefore = (Start + Duration) < meeting.Start;
             bool startIsAfter = (meeting.Start + meeting.Duration) < Start;
-            bool isDuringBreak = (meeting.Start )
             bool test = !(endIsBefore || startIsAfter);
             return test;
         }
