@@ -32,15 +32,29 @@ namespace Scheduler
 
         private void Button_ChangeDate_Click(object sender, EventArgs e)
         {
-            int index = listBox_Meetings.SelectedIndex; 
-            _caseWorker.ChangeMeeting(index, dateTimePicker.Value);
-            RefreshDisplayedMeetings();
+            int index = listBox_Meetings.SelectedIndex;
+            try
+            {
+                _caseWorker.ChangeMeeting(index, dateTimePicker.Value);
+                RefreshDisplayedMeetings();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Time not available. Pick another time!");
+            }
         }
 
         private void Button_Add_Click(object sender, EventArgs e)
         {
-            _caseWorker.NewDateAdded(dateTimePicker.Value);
-            RefreshDisplayedMeetings();
+            try
+            {
+                _caseWorker.NewDateAdded(dateTimePicker.Value);
+                RefreshDisplayedMeetings();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Time not available. Pick another time!");
+            }
         }
 
         public void RefreshDisplayedMeetings()

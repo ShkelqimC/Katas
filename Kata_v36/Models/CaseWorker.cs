@@ -1,5 +1,9 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Scheduler.Exceptions;
 
 namespace Scheduler.Models
@@ -12,10 +16,17 @@ namespace Scheduler.Models
         public CaseWorker()
         {
             Meetings = new List<Meeting>();
-
+            int workHours = 8;
             DateTime startOfWork = DateTime.Today.AddHours(8);
-            for (int i = 0; i < 6; i++)
+            DateTime endOfWork = startOfWork.AddHours(9);
+            DateTime startOfBreak = startOfWork.AddHours(4);
+            DateTime endOfBreak = startOfWork.AddHours(5);
+            for (int i = 0; i < workHours; i++)
             {
+                if (i==4)
+                {
+                    continue;
+                }
                 DateTime startOfMeeting = startOfWork.AddHours(i);
                 Meeting meeting = new Meeting(startOfMeeting);
 
@@ -29,9 +40,13 @@ namespace Scheduler.Models
 
             foreach (Meeting meeting in Meetings)
             {
-                // TODO kasta MeetingOverlapException om två möten överlappar
-            }
+                if (meeting.Overlap(newMeeting))
+                {
+                    throw new MeetingOverlapException(meeting);
+                }
 
+                // TODO kasta MeetingOverlapException om två möten överlappar
+            }            
             Meetings.Add(newMeeting);
         }
 
@@ -42,13 +57,14 @@ namespace Scheduler.Models
 
             foreach (Meeting meeting in Meetings)
             {
-                if (meeting == meetingToChange)
-                    continue;
-
+                if (meeting.Overlap(attemptMeeting))
+                {
+                    throw new MeetingOverlapException(meeting);
+                }
                 // TODO kasta MeetingOverlapException om två möten överlappar
             }
-
             meetingToChange.Start = newStart;
+
         }
     }
 }

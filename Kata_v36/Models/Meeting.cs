@@ -27,8 +27,9 @@ namespace Scheduler.Models
         {
             bool endIsBefore = (Start + Duration) < meeting.Start;
             bool startIsAfter = (meeting.Start + meeting.Duration) < Start;
-
-            return !(endIsBefore || startIsAfter);
+            bool isDuringBreak = (meeting.Start )
+            bool test = !(endIsBefore || startIsAfter);
+            return test;
         }
 
         public override string ToString()
