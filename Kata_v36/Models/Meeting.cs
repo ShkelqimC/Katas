@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Scheduler.Models
 {
@@ -7,6 +8,7 @@ namespace Scheduler.Models
         public DateTime Start;
         public TimeSpan Duration;
         public Applicant Applicant;
+        
 
         public Meeting(DateTime start)
         {
@@ -31,14 +33,12 @@ namespace Scheduler.Models
 
         public override string ToString()
         {
-            string date = Start.ToString("d'/'M'/'yy");
-
-            string info = date;
+            string date = Start.ToLongDateString() + Start.ToString(" HH:mm") + " - " + Start.Add(Duration).ToString("HH:mm");
 
             if (Applicant != null)
-                info += " with: " + Applicant.Name;
+                date += " with: " + Applicant.Name;
 
-            return info;
+            return date;
         }
     }
 }
