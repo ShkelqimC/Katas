@@ -18,6 +18,11 @@ namespace Scheduler
         private readonly CaseWorker _caseWorker;
         private readonly Action _action;
 
+        public CaseWorkerVisualSchedule(string name)
+        {
+
+        }
+
         public CaseWorkerVisualSchedule(CaseWorker caseWorker, Action action)
         {
             _caseWorker = caseWorker;

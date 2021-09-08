@@ -58,24 +58,7 @@ namespace Scheduler.Models
                 }
 
             }
-            
 
-            //foreach (CaseWorker caseWorker in CaseWorkers)
-            //{
-            //    foreach (Meeting meeting in caseWorker.Meetings)
-            //    {
-            //        if (UnassignedApplicants.Count == 0)
-            //            return;
-
-            //        if (meeting.Applicant == null)
-            //        {
-            //            int randomIndex = rnd.Next(0, UnassignedApplicants.Count); //TODO detta är inte slumpat.
-
-            //            meeting.Applicant = UnassignedApplicants[randomIndex];
-            //            UnassignedApplicants.RemoveAt(randomIndex);
-            //        }
-            //    }
-            //}
         }
     }
 }

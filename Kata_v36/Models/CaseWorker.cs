@@ -37,6 +37,7 @@ namespace Scheduler.Models
 
         public void NewDateAdded(DateTime start)
         {
+
             
             Meeting newMeeting = new Meeting(start);
             //bool lunch = newMeeting.Start.Hour.Equals(12) && 
