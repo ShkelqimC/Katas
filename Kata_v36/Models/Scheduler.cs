@@ -32,6 +32,7 @@ namespace Scheduler.Models
                 caseWorker.Name = randomNames[10 + i];
                 CaseWorkers.Add(caseWorker);
             }
+            UnassignedApplicants.Sort(Applicant.Compare);
         }
 
         public void RandomlyFillUpMeetings()

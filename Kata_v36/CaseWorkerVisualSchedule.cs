@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +16,12 @@ namespace Scheduler
     public partial class CaseWorkerVisualSchedule : UserControl
     {
         private readonly CaseWorker _caseWorker;
+        private readonly Action _action;
 
-        public CaseWorkerVisualSchedule(CaseWorker caseWorker)
+        public CaseWorkerVisualSchedule(CaseWorker caseWorker, Action action)
         {
             _caseWorker = caseWorker;
+            _action = action;
             InitializeComponent();
 
             label_CaseWorkerName.Text = _caseWorker.Name;
@@ -29,9 +32,11 @@ namespace Scheduler
 
             RefreshDisplayedMeetings();
         }
+        
 
         private void Button_ChangeDate_Click(object sender, EventArgs e)
         {
+            
             int index = listBox_Meetings.SelectedIndex;
             try
             {
@@ -42,10 +47,13 @@ namespace Scheduler
             {
                 MessageBox.Show(exception.Message, "Overlap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            _action();
         }
 
         private void Button_Add_Click(object sender, EventArgs e)
         {
+            
+            
             try
             {
                 _caseWorker.NewDateAdded(dateTimePicker.Value);
@@ -55,6 +63,7 @@ namespace Scheduler
             {
                 MessageBox.Show(exception.Message, "Overlap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            _action();
         }
 
         public void RefreshDisplayedMeetings()
