@@ -8,7 +8,9 @@ namespace OnlineOrderSystem
     {
         private static List<OnlineOrder> orders;
         static void Main(string[] args)
-  {
+        {
+
+
            MakeOrder();
 
         }
@@ -18,6 +20,7 @@ namespace OnlineOrderSystem
             List<OnlineOrder> listOfOrders = new List<OnlineOrder>();
             List<String> allItemsList = new List<string>();
             List<string> uniqueList = new List<string>();
+            Dictionary<string, int> itemRecord = new Dictionary<string, int>();
 
             bool b = true;
             while (true)
@@ -28,9 +31,10 @@ namespace OnlineOrderSystem
                 Console.WriteLine("3: Order a bouquet");
                 Console.WriteLine("4: Order something else");
                 Console.WriteLine("5: Show all orders");
-                Console.WriteLine("6: Show how many times each item was ordered");
+                Console.WriteLine("6: Show how many times each item was ordered with list");
                 Console.WriteLine("7: Show time of order and item ordered");
-                Console.WriteLine("8: Exit menu");
+                Console.WriteLine("8: Print  Show how many times each item was ordered with dictionary");
+                Console.WriteLine("9: Exit menu");
 
                 Console.Write("Type option and press enter:");
                 while (true)
@@ -58,6 +62,14 @@ namespace OnlineOrderSystem
                     {
                         uniqueList.Add("electric bicycle");
                     }
+                    if (!itemRecord.ContainsKey("electric bicycle"))
+                    {
+                        itemRecord["electric bicycle"] = 1;
+                    }
+                    else
+                    {
+                        itemRecord["electric bicycle"]++;
+                    }
 
                 }
                 else if (choice == 2)
@@ -67,6 +79,14 @@ namespace OnlineOrderSystem
                     if (!uniqueList.Contains("trampoline"))
                     {
                         uniqueList.Add("trampoline");
+                    }
+                    if (!itemRecord.ContainsKey("trampoline"))
+                    {
+                        itemRecord["trampoline"] = 1;
+                    }
+                    else
+                    {
+                        itemRecord["trampoline"]++;
                     }
 
 
@@ -78,6 +98,14 @@ namespace OnlineOrderSystem
                     if (!uniqueList.Contains("bouquet"))
                     {
                         uniqueList.Add("bouquet");
+                    }
+                    if (!itemRecord.ContainsKey("bouquet"))
+                    {
+                        itemRecord["bouquet"] = 1;
+                    }
+                    else
+                    {
+                        itemRecord["bouquet"]++;
                     }
 
                 }
@@ -99,6 +127,14 @@ namespace OnlineOrderSystem
                     {
                         listOfOrders.Add(new OnlineOrder(t.ToLower()));
                         allItemsList.Add(t.ToLower());
+                    }
+                    if (!itemRecord.ContainsKey(t.ToLower())&& t != "" && t != "0")
+                    {
+                        itemRecord[t.ToLower()] = 1;
+                    }
+                    else
+                    {
+                        itemRecord[t.ToLower()]++;
                     }
                     Console.Clear();
                 }
@@ -122,7 +158,6 @@ namespace OnlineOrderSystem
                     Console.WriteLine("Press any key to return to menu");
                     Console.ReadKey();
                     Console.Clear();
-
                 }
                 else if (choice == 7)
                 {
@@ -137,6 +172,17 @@ namespace OnlineOrderSystem
                     Console.ReadKey();
                 }
                 else if (choice == 8)
+                {
+                    
+                    foreach (var item in itemRecord)
+                    {
+                        Console.WriteLine(item.Value +" orders of " + item.Key + " has been made.");
+                    }
+                    Console.WriteLine("Press any key to return to menu");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else if (choice == 9)
                 {
                     break;
                 }
