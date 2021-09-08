@@ -40,7 +40,7 @@ namespace Scheduler
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Time not available. Pick another time!");
+                MessageBox.Show(exception.Message, "Overlap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Scheduler
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Time not available. Pick another time!");
+                MessageBox.Show(exception.Message, "Overlap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

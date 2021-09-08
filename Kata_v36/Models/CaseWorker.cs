@@ -19,14 +19,8 @@ namespace Scheduler.Models
             int workHours = 8;
             DateTime startOfWork = DateTime.Today.AddHours(8);
             DateTime endOfWork = startOfWork.AddHours(9);
-            DateTime startOfBreak = startOfWork.AddHours(4);
-            DateTime endOfBreak = startOfWork.AddHours(5);
             for (int i = 0; i < workHours; i++)
             {
-                if (i==4)
-                {
-                    continue;
-                }
                 DateTime startOfMeeting = startOfWork.AddHours(i);
                 Meeting meeting = new Meeting(startOfMeeting);
 
