@@ -8,7 +8,7 @@ namespace OnlineOrderSystem
 {
     public class OnlineOrder
     {
-        private int _orderNumber = 0;
+        private readonly int _orderNumber = 0000;
         public string Name;
         private DateTime timeOfOrder;
         public static int amountOfOrders;
@@ -30,7 +30,11 @@ namespace OnlineOrderSystem
             _orderNumber = amountOfOrders;
         }
 
-     
+        public int _Ordernummer
+        {
+            get => _orderNumber;
+            set { ; }
+        }
 
     }
 }

@@ -15,6 +15,9 @@ namespace OnlineOrderSystem
 
         }
 
+
+
+
         public static void MakeOrder()
         {
             List<OnlineOrder> listOfOrders = new List<OnlineOrder>();
@@ -30,7 +33,7 @@ namespace OnlineOrderSystem
                 Console.WriteLine("2: Order a trampoline order");
                 Console.WriteLine("3: Order a bouquet");
                 Console.WriteLine("4: Order something else");
-                Console.WriteLine("5: Show all orders");
+                Console.WriteLine("5: Show all orders and ordernumbers");
                 Console.WriteLine("6: Show how many times each item was ordered with list");
                 Console.WriteLine("7: Show time of order and item ordered");
                 Console.WriteLine("8: Print  Show how many times each item was ordered with dictionary");
@@ -141,7 +144,7 @@ namespace OnlineOrderSystem
                 else if (choice == 5)
                 {
                     Console.WriteLine("List of ordered items: ");
-                    listOfOrders.ForEach(x => Console.WriteLine(x.Name + "\n"));
+                    listOfOrders.ForEach(x => Console.WriteLine(x.Name + " with the ordernumber: " + x._Ordernummer));
                     Console.WriteLine("Press any key to return to menu");
                     Console.ReadKey();
                     Console.Clear();
