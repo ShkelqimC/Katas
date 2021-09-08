@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using KataHelper;
@@ -35,25 +36,46 @@ namespace Scheduler.Models
             UnassignedApplicants.Sort(Applicant.Compare);
         }
 
+
         public void RandomlyFillUpMeetings()
         {
             Random rnd = new Random();
-            foreach (CaseWorker caseWorker in CaseWorkers)
+
+            while (UnassignedApplicants.Count != 0)
             {
-                foreach (Meeting meeting in caseWorker.Meetings)
+                int randomIndex = rnd.Next(0, UnassignedApplicants.Count);
+                int randomCaseWorker = rnd.Next(0, CaseWorkers.Count);
+                CaseWorker caseworker = CaseWorkers[randomCaseWorker];
+                
+                foreach (var meeting in caseworker.Meetings)
                 {
-                    if (UnassignedApplicants.Count == 0)
-                        return;
-
-                    if (meeting.Applicant == null)
+                    if (meeting.Applicant==null)
                     {
-                        int randomIndex = rnd.Next(0, UnassignedApplicants.Count); //TODO detta är inte slumpat.
-
                         meeting.Applicant = UnassignedApplicants[randomIndex];
                         UnassignedApplicants.RemoveAt(randomIndex);
+                        break;
                     }
                 }
+
             }
+            
+
+            //foreach (CaseWorker caseWorker in CaseWorkers)
+            //{
+            //    foreach (Meeting meeting in caseWorker.Meetings)
+            //    {
+            //        if (UnassignedApplicants.Count == 0)
+            //            return;
+
+            //        if (meeting.Applicant == null)
+            //        {
+            //            int randomIndex = rnd.Next(0, UnassignedApplicants.Count); //TODO detta är inte slumpat.
+
+            //            meeting.Applicant = UnassignedApplicants[randomIndex];
+            //            UnassignedApplicants.RemoveAt(randomIndex);
+            //        }
+            //    }
+            //}
         }
     }
 }

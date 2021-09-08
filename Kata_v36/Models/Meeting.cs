@@ -23,6 +23,7 @@ namespace Scheduler.Models
             Applicant = null;
         }
 
+
         public bool Overlap(Meeting meeting)
         {
             bool endIsBefore = (Start + Duration) < meeting.Start;

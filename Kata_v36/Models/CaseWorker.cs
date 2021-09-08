@@ -12,6 +12,10 @@ namespace Scheduler.Models
     {
         public string Name;
         public List<Meeting> Meetings;
+        public int CompareMeetings(Meeting a, Meeting b)
+        {
+            return a.Start.CompareTo(b.Start);
+        }
 
         public CaseWorker()
         {
@@ -19,6 +23,7 @@ namespace Scheduler.Models
             int workHours = 8;
             DateTime startOfWork = DateTime.Today.AddHours(8);
             DateTime endOfWork = startOfWork.AddHours(9);
+
             for (int i = 0; i < workHours; i++)
             {
                 DateTime startOfMeeting = startOfWork.AddHours(i);
@@ -26,11 +31,15 @@ namespace Scheduler.Models
 
                 Meetings.Add(meeting);
             }
+            Meetings.Sort(CompareMeetings);
+           
         }
 
         public void NewDateAdded(DateTime start)
         {
+            
             Meeting newMeeting = new Meeting(start);
+            //bool lunch = newMeeting.Start.Hour.Equals(12) && 
 
             foreach (Meeting meeting in Meetings)
             {
@@ -42,6 +51,7 @@ namespace Scheduler.Models
                 // TODO kasta MeetingOverlapException om två möten överlappar
             }            
             Meetings.Add(newMeeting);
+            Meetings.Sort(CompareMeetings);
         }
 
         public void ChangeMeeting(int index, DateTime newStart)
@@ -58,7 +68,7 @@ namespace Scheduler.Models
                 // TODO kasta MeetingOverlapException om två möten överlappar
             }
             meetingToChange.Start = newStart;
-
+            Meetings.Sort(CompareMeetings);
         }
     }
 }
